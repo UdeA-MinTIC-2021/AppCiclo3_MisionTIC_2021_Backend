@@ -21,9 +21,9 @@ const app = Express();
 app.use(Express.json());
 app.use(cors());
 
-app.get('/vendedores', (req, res)=>{
+app.get('/miaplicacion', (req, res)=>{
     console.log('alguien hizo get en la ruta /vendedores');
-    conexion.collection('vendedor').find({}).limit(50).toArray((err, result)=>{
+    conexion.collection('vendedores').find({}).limit(50).toArray((err, result)=>{
         if(err){
             res.status(500).send("Error consultando los vendedores")
         } 
@@ -33,7 +33,7 @@ app.get('/vendedores', (req, res)=>{
     })
 });
 
-app.post('/vendedores/nuevo', (req, res)=>{
+app.post('/miaplicacion/nuevo', (req, res)=>{
     console.log(req)
     const datosVendedores = req.body;
     console.log('llaves: ', Object.keys(datosVendedores));
@@ -51,7 +51,7 @@ app.post('/vendedores/nuevo', (req, res)=>{
         Object.keys(datosVendedores).includes('comentarios')
         ){
         // crear codigo para crear vendedor en la bd
-        conexion.collection('vendedor').insertOne(datosVendedores, (err, result)=>{
+        conexion.collection('vendedores').insertOne(datosVendedores, (err, result)=>{
             if(err){
                 console.error(err);
                 res.sendStatus(500);
@@ -69,7 +69,7 @@ app.post('/vendedores/nuevo', (req, res)=>{
     }
 });
 
-app.patch('/vendedores/editar', (req, res)=>{
+app.patch('/miaplicacion/editar', (req, res)=>{
     const edicion = req.body;
     console.log(edicion);
     const filtroVendedor = {_id: new ObjectId(edicion.id)};
@@ -77,7 +77,7 @@ app.patch('/vendedores/editar', (req, res)=>{
     const operacion = {
         $set: edicion,
     };
-    conexion.collection('vendedor').findOneAndUpdate(filtroVendedor, operacion, { upsert: true }, (err,result)=>{
+    conexion.collection('vendedores').findOneAndUpdate(filtroVendedor, operacion, { upsert: true }, (err,result)=>{
     if(err){
         console.error('error actualizando el vendedor: ', err)
         res.sendStatus(500);
@@ -89,9 +89,9 @@ app.patch('/vendedores/editar', (req, res)=>{
     });
 });
 
-app.delete('/vendedores/eliminar', (req, res)=>{
+app.delete('/miaplicacion/eliminar', (req, res)=>{
     const filtroVendedor = {_id: new ObjectId(req.body.id)}; 
-    conexion.collection('vendedor').deleteOne(filtroVendedor, (err, result)=>{
+    conexion.collection('vendedores').deleteOne(filtroVendedor, (err, result)=>{
         if(err){
             console.error(err)
             res.sendStatus(500);
@@ -108,7 +108,7 @@ const main = () =>{
         if(err){
             console.error("Error conectando a la base de datos");
         }
-        conexion = db.db('vendedores');
+        conexion = db.db('miaplicacion');
         console.log('conexion exitosa');
         return app.listen(5000, ()=>{
             console.log('escuchando puerto 5000');
