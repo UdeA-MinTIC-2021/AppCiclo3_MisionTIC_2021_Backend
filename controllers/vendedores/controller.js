@@ -22,7 +22,7 @@ const crearVendedor = async (datosVendedores, callback) => {
         Object.keys(datosVendedores).includes('direccion') &&
         Object.keys(datosVendedores).includes('comentarios')
         ){
-            const baseDeDatos = getDB();
+        const baseDeDatos = getDB();
         // crear codigo para crear vendedor en la bd
         await baseDeDatos.collection('vendedores').insertOne(datosVendedores, callback);
         } else{
