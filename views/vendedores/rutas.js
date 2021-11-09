@@ -18,16 +18,16 @@ rutasVendedores.route('/miaplicacion').get((req, res)=>{
     queryAllVendedores(genericCallback(res))
 });
 
-rutasVendedores.route('/miaplicacion/nuevo').post((req, res)=>{
+rutasVendedores.route('/miaplicacion').post((req, res)=>{
     crearVendedor(req.body, genericCallback(res))
 });
 
-rutasVendedores.route('/miaplicacion/editar').patch((req, res)=>{
-    editarVendedor(req.body, genericCallback(res))
+rutasVendedores.route('/miaplicacion/:id').patch((req, res)=>{
+    editarVendedor(req.params.id, req.body, genericCallback(res))
 });
 
-rutasVendedores.route('/miaplicacion/eliminar').delete((req, res)=>{
-    eliminarVendedor(req.body.id, genericCallback(res))
+rutasVendedores.route('/miaplicacion/:id').delete((req, res)=>{
+    eliminarVendedor(req.params.id, genericCallback(res))
 });
 
 export default rutasVendedores;

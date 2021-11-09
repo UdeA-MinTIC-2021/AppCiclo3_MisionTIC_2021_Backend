@@ -31,10 +31,9 @@ const crearVendedor = async (datosVendedores, callback) => {
 
 };
 
-const editarVendedor = async (edicion, callback) =>{
+const editarVendedor = async (id, edicion, callback) =>{
     
-    const filtroVendedor = {_id: new ObjectId(edicion.id)};
-    delete edicion.id;
+    const filtroVendedor = {_id: new ObjectId(id)};
     const operacion = {
         $set: edicion,
     };

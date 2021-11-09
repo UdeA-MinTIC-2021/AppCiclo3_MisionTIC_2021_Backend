@@ -6,6 +6,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { conectarBD, getDB } from './db/db.js';
 import rutasVendedores from './views/vendedores/rutas.js';
+import rutasVentas from './views/ventas/rutas.js';
 
 
 dotenv.config({ path:'./.env' });
@@ -16,6 +17,7 @@ const app = Express();
 app.use(Express.json());
 app.use(cors());
 app.use(rutasVendedores)
+app.use(rutasVentas)
 
 
 const main = () =>{
