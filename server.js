@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 import { conectarBD, getDB } from './db/db.js';
 import rutasVendedores from './views/vendedores/rutas.js';
 import rutasVentas from './views/ventas/rutas.js';
+import rutasUsuarios from './views/usuarios/rutas.js';
+import { auth } from 'express-oauth2-jwt-bearer';
 
 
 dotenv.config({ path:'./.env' });
@@ -16,8 +18,18 @@ const app = Express();
 
 app.use(Express.json());
 app.use(cors());
+
+
+const checkJwt = auth({
+    audience: 'api-autenticacion-ventas-mintic',
+    issuerBaseURL: `https://misiontic-app.us.auth0.com/`,
+  });
+
+app.use(checkJwt);
+
 app.use(rutasVendedores)
 app.use(rutasVentas)
+app.use(rutasUsuarios)
 
 
 const main = () =>{
