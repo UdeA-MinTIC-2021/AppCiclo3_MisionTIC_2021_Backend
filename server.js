@@ -25,6 +25,7 @@ const checkJwt = auth({
     issuerBaseURL: `https://misiontic-app.us.auth0.com/`,
   });
 
+  // 4 y 5. enviarle el token a Auth0 para que diga si es valido o no
 app.use(checkJwt);
 
 app.use(rutasVendedores)
