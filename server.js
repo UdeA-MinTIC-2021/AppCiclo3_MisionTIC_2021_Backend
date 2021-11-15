@@ -9,6 +9,7 @@ import rutasVendedores from './views/vendedores/rutas.js';
 import rutasVentas from './views/ventas/rutas.js';
 import rutasUsuarios from './views/usuarios/rutas.js';
 import { auth } from 'express-oauth2-jwt-bearer';
+import autorizacionEstadoUsuario from './middleware/autorizacionEstadoUsuario.js';
 
 
 dotenv.config({ path:'./.env' });
@@ -28,6 +29,7 @@ const checkJwt = auth({
   // 4 y 5. enviarle el token a Auth0 para que diga si es valido o no
 app.use(checkJwt);
 
+app.use(autorizacionEstadoUsuario)
 app.use(rutasVendedores)
 app.use(rutasVentas)
 app.use(rutasUsuarios)

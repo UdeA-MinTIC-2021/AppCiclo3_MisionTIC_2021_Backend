@@ -31,7 +31,7 @@ const baseDeDatos = getDB();
 await baseDeDatos.collection('Usuarios').findOne({ email: user.email }, async (err, response)=>{
     console.log("response consulta bd: ", response)
     if(response){
-        //7.1. si es usuario ya está devuelve la info del usuario
+        //7.1. si es usuario ya está devuelve la info del usuario 
         callback(err, response)
     }
     else{
@@ -39,6 +39,7 @@ await baseDeDatos.collection('Usuarios').findOne({ email: user.email }, async (e
         user.auth0ID = user._id; 
         delete user._id;
         user.rol='Pendiente'
+        user.estado = 'pendiente'
         await crearUsuario(user, (err, respuesta)=> callback(err, user));
     }
 });
