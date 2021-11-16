@@ -24,7 +24,7 @@ const consultarUsuario = async (id, callback) => {
 const consultarOcrearUsuario = async (req, callback) => {
 //6.1. obtener datos desde el token
 const token = req.headers.authorization.split('Bearer ')[1];
-const user = jwt_decode(token)['https://rocky-beach-27823.herokuapp.com/userData']
+const user = jwt_decode(token)['http://localhost:5000/userData']
 console.log('el token es este: ', user);
 //6.2. con el correo o con el id de auth0 verificar si el usuario está en la bd o no
 const baseDeDatos = getDB();
