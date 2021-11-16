@@ -38,8 +38,8 @@ app.use(rutasUsuarios)
 
 
 const main = () =>{
-        return app.listen(process.env.PORT, ()=>{
-        console.log(`escuchando puerto ${process.env.PORT}`);
+        return app.listen(port, ()=>{
+        console.log(`escuchando puerto ${port}`);
     });
 };
 

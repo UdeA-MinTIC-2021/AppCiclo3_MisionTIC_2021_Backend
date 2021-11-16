@@ -7,7 +7,7 @@ const autorizacionEstadoUsuario = async (req, res, next)=>{
 
     // 1. obtener usuario desde token
 const token = req.headers.authorization.split('Bearer ')[1];
-const user = jwt_decode(token)['http://localhost:5000/userData']
+const user = jwt_decode(token)['http://localhost/userData']
 console.log(user);
 // 2. consultar usuario desde bd
 const baseDeDatos = getDB();
